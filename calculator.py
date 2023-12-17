@@ -1,4 +1,4 @@
-from Operations import *
+from operations import *
 
 def main():
     print("     This is a simple calculator     ")
