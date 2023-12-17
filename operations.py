@@ -8,6 +8,8 @@ def Mul(x, y):
     return int(x) * int(y)
 
 def Div(x, y):
+    if y == 0:
+        raise ValueError("Cannot divide bu zero !")
     return int(x) / int(y)
 
 def Mod(x, y):

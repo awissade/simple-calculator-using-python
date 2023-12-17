@@ -1,46 +1,57 @@
+from colorama import init, Fore
+
+init(autoreset=True)  # Initialize colorama
+
 from operations import *
 
-def main():
-    print("     This is a simple calculator     ")
-    print("-------------------------------------------")
-    print("? ? ? = ?")
-    print("-------------------------------------------")
-    x = float(input("Enter the first number : "))
-    print("-------------------------------------------")
-    print(x, "? ? = ?")
-    print("-------------------------------------------")
-    y = float(input("Enter the second number : "))
-    print("-------------------------------------------")
-    print(x, "?", y, "= ?")
-    print("-------------------------------------------")
-    operation = str(input("Enter one of this operations (+,-,*,/,%,^) : "))
-    print("-------------------------------------------")
-    if operation == '+':
-        print(x, operation, y, "=", Add(x, y))
-        print("-------------------------------------------")
-    elif operation == '-':
-        print(x, operation, y, "=", Sub(x, y))
-        print("-------------------------------------------")
-    elif operation == '*':
-        print(x, operation, y, "=", Mul(x, y))
-        print("-------------------------------------------")
-    elif operation == '/':
-        print(x, operation, y, "=", Div(x, y))
-        print("-------------------------------------------")
-    elif operation == '%':
-        print(x, operation, y, "=", Mod(x, y))
-        print("-------------------------------------------")
-    elif operation == '**' or operation == '^':
-        print(x, operation, y, "=", Exp(x, y))
-        print("-------------------------------------------")
-    else:
-        print("There is an error in the operation chosing")
-        print("-------------------------------------------")
+def get_number_input(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print(Fore.RED + "Invalid input. Please enter a valid number." + Fore.RESET)
 
-    ask = str(input("Do you want to try again? "))
-    if ask.upper() == "YES" or ask.upper() == "Y":
+def main():
+    print(Fore.CYAN + "+" + "-" * 43 + "+")
+    print("|" + " " * 10 + Fore.YELLOW + "Simple Calculator" + " " * 10 + "|")
+    print("+" + "-" * 43 + "+" + Fore.RESET)
+
+    x = get_number_input(Fore.GREEN + "Enter the first number: " + Fore.RESET)
+    y = get_number_input(Fore.GREEN + "Enter the second number: " + Fore.RESET)
+
+    print(Fore.CYAN + "+" + "-" * 43 + "+")
+    operation = input("| " + Fore.GREEN + "Enter an operation (+, -, *, /, %, ^): " + Fore.RESET)
+    print(Fore.CYAN + "+" + "-" * 43 + "+" + Fore.RESET)
+
+    try:
+        if operation == '+':
+            result = Add(x, y)
+        elif operation == '-':
+            result = Sub(x, y)
+        elif operation == '*':
+            result = Mul(x, y)
+        elif operation == '/':
+            result = Div(x, y)
+        elif operation == '%':
+            result = Mod(x, y)
+        elif operation == '**' or operation == '^':
+            result = Exp(x, y)
+        else:
+            print("| " + Fore.RED + "Invalid operation. " + " " * 17 + "|" + Fore.RESET)
+            return
+
+        print("| " + Fore.YELLOW + f"{x} {operation} {y} = {result:.2f}" + " " * 10 + "|")
+    except ValueError as e:
+        print("| " + Fore.RED + f"Error: {e}" + " " * 23 + "|" + Fore.RESET)
+
+    print(Fore.CYAN + "+" + "-" * 43 + "+")
+    ask = input("| " + Fore.GREEN + "Do you want to try again? (yes/no): " + Fore.RESET).lower()
+    if ask in ["yes", "y"]:
         main()
     else:
-        print("Thanks for your time")
+        print("|" + " " * 41 + Fore.YELLOW + "Thanks for your time" + Fore.CYAN + " " * 2 + "|")
+        print(Fore.CYAN + "+" + "-" * 43 + "+" + Fore.RESET)
 
-main()
+if __name__ == "__main__":
+    main()
+
