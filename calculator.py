@@ -1,6 +1,6 @@
 from colorama import init, Fore
 
-init(autoreset=True)  # Initialize colorama
+init(autoreset=True)
 
 from operations import *
 
