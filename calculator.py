@@ -42,6 +42,5 @@ def main():
         main()
     else:
         print("Thanks for your time")
-        return 0
 
 main()
